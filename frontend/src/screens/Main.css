@@ -1,0 +1,9 @@
+* {
+    font-family: 'Source Sans Pro', sans-serif;
+    }
+.page {
+    display: grid;
+    grid-template-rows: max-content 500px;
+    grid-template-areas: "choices"
+                         "planter";
+}
