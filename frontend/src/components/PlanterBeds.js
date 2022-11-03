@@ -6,11 +6,30 @@ import { useActiveContext } from '../hooks/useActiveContext'
 const PlanterBeds = () => {
 
     const { planters, dispatch } = usePlantersContext()
-    const { dispatch: activeDispatch } = useActiveContext()
+    const { activeName, activeId, dispatch: activeDispatch } = useActiveContext()
 
-    function clicked(e) {
-        const bedToLoad = e.target.innerText
-        activeDispatch({type: 'SET_ACTIVE_PLANTER', payload: bedToLoad})
+    async function clicked(e) {
+
+
+        const bedToLoad = {
+            nameToFind: e.target.innerText
+        }
+        const response = await fetch('/api/plantersid', {
+            method: 'POST',
+            body: JSON.stringify(bedToLoad),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        const json = await response.json()
+
+        const newPayload = {
+            activeId: json._id,
+            activeName: bedToLoad.nameToFind
+        }
+
+        activeDispatch({type: 'SET_ACTIVE_PLANTER', payload: newPayload})
+        console.log(activeName, activeId)
     }
 
     useEffect(() => {

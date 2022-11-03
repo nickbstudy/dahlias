@@ -5,7 +5,7 @@ export const useActiveContext = () => {
     const context = useContext(ActiveContext)
 
     if (!context) {
-        throw Error('usePlantersContext must be used inside a PlantersContextProvider')
+        throw Error('useActiveContext must be used inside a ActiveContextProvider')
     }
 
     return context

@@ -5,7 +5,6 @@ export const FlowerContext = createContext()
 export const flowerReducer = (state, action) => {
     switch (action.type) {
         case 'PICKUP_FLOWER':
-            console.log('picked up')
             return {picked: action.payload}
         case 'PLANT_FLOWER':
             return {picked: null}
@@ -17,7 +16,8 @@ export const flowerReducer = (state, action) => {
 
 export const FlowerContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(flowerReducer, {
-        picked: ''
+        picked: '',
+        source: null
         // locations: ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty',
         //             'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 
         //             'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty']

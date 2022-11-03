@@ -5,10 +5,9 @@ export const ActiveContext = createContext()
 export const activeReducer = (state, action) => {
     switch (action.type) {
         case 'SET_ACTIVE_PLANTER':
-            console.log(`Setting active planter to ${action.payload}`)
             return {
-                activeId: action.payload
-                
+                activeId: action.payload,
+                activeName: action.payload
             }
         default:
             return state
@@ -18,7 +17,8 @@ export const activeReducer = (state, action) => {
 export const ActiveContextProvider = ({children}) => {
 
     const [state, dispatch] = useReducer(activeReducer, {
-        activeId: ''
+        activeId: '',
+        activeName: ''
     })
 
     
@@ -28,4 +28,5 @@ export const ActiveContextProvider = ({children}) => {
             {children}
         </ActiveContext.Provider>
     )
+    console.log(state)
 }

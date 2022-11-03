@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useActiveContext } from '../hooks/useActiveContext'
 import { usePlantersContext } from '../hooks/usePlantersContext'
 import PlanterBeds from './PlanterBeds'
 
@@ -6,6 +7,7 @@ import PlanterBeds from './PlanterBeds'
 const PlanterForm = () => {
 
     const { dispatch } = usePlantersContext()
+    // const { activeName } = useActiveContext()
 
 
     const [newName, setNewName] = useState('')
@@ -35,11 +37,13 @@ const PlanterForm = () => {
         }
     }
 
+
+
     
   return (
     <div style={{width: '410px', height: '503px', overflowY: 'auto'}}>
         <form className="create" onSubmit={handleSubmit}>
-        <h3>Add a New Planter:</h3>
+        <h3 id="title">Add a New Planter:</h3>
         <input type="text" onChange={(e) => setNewName(e.target.value)} value={newName} />
         <button>Create</button>
         </form>
