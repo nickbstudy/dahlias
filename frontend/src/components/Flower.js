@@ -4,9 +4,10 @@ const Flower = (props) => {
 
     let { title, fileName } = props
   return (
-    <div style={{ width: '106px', height: '140px', display: 'flex', flexDirection: 'column', alignItems: "center", textAlign: 'center'}}>
+    <div style={{ width: '105px', height: '142px', display: 'flex', flexDirection: 'column', alignItems: "center", 
+                  textAlign: 'center'}}>
         
-        <img src={fileName} alt={title} style={{width: '100px', height: '100px'}}/>
+        <img src={fileName} alt={title} style={{width: '98px', height: '98px'}}/>
         {title}
     </div>
   )
