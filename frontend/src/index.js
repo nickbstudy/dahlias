@@ -4,15 +4,21 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { PlantersContextProvider } from './context/PlanterContext';
+import { FlowerContextProvider } from './context/FlowerContext';
+import { ActiveContextProvider } from './context/ActiveContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <FlowerContextProvider>
     <PlantersContextProvider>
+    <ActiveContextProvider>
       <App />
+    </ActiveContextProvider>
     </PlantersContextProvider>
+    </FlowerContextProvider>
   </React.StrictMode>
 );
 

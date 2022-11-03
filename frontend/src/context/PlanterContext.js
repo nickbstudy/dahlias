@@ -12,6 +12,12 @@ export const plantersReducer = (state, action) => {
             return {
                 planters: [action.payload, ...state.planters]
             }
+        case 'SET_ACTIVE_PLANTER':
+            console.log(`Setting active planter to ${action.payload}`)
+            return {
+                activeId: action.payload
+                
+            }
         default:
             return state
     }
@@ -20,7 +26,8 @@ export const plantersReducer = (state, action) => {
 export const PlantersContextProvider = ({children}) => {
 
     const [state, dispatch] = useReducer(plantersReducer, {
-        planters: null
+        planters: null,
+        activeId: ''
     })
 
     

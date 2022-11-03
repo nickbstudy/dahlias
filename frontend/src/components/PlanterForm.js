@@ -1,17 +1,15 @@
-import { useState, useEffect } from 'react'
-import ListGroup from 'react-bootstrap/ListGroup'
+import { useState } from 'react'
 import { usePlantersContext } from '../hooks/usePlantersContext'
+import PlanterBeds from './PlanterBeds'
 
 
 const PlanterForm = () => {
 
-    const [newName, setNewName] = useState('')
-    const [error, setError] = useState(null)
-    const [planters, setPlanters] = useState(null)
+    const { dispatch } = usePlantersContext()
 
-    function clicked(e) {
-        const bedToLoad = e.target.innerText
-    }
+
+    const [newName, setNewName] = useState('')
+    // const [planters, setPlanters] = useState(null)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -28,27 +26,16 @@ const PlanterForm = () => {
         const json = await response.json()
 
         if (!response.ok) {
-            setError(json.error)
+            alert(json.error)
         }
         if (response.ok) {
-            setError(null)
             console.log('new planter added', json)
             setNewName('')
+            dispatch({type: "CREATE_PLANTER", payload: json})
         }
     }
 
-    useEffect(() => {
-        const fetchPlanters = async () => {
-            const response = await fetch('/api/planters')
-            const json = await response.json()
-
-            if (response.ok) {
-                setPlanters(json)
-            }
-        }
-
-        fetchPlanters()
-    }, [])
+    
   return (
     <div style={{width: '410px', height: '503px', overflowY: 'auto'}}>
         <form className="create" onSubmit={handleSubmit}>
@@ -56,16 +43,7 @@ const PlanterForm = () => {
         <input type="text" onChange={(e) => setNewName(e.target.value)} value={newName} />
         <button>Create</button>
         </form>
-
-        <div style={{overflowY: 'hidden'}}>
-        <ListGroup>
-            {planters && planters.map((bed) => (
-                <ListGroup.Item key={bed._id} action onClick={clicked} >{bed.planterName}</ListGroup.Item>
-            ))}            
-        </ListGroup>
-        </div>
-        
-
+        <PlanterBeds />
     </div>
 
   )

@@ -20,7 +20,7 @@ const createPlanter = async (req, res) => {
     const existing = await Planter.exists({ planterName: planterName})
     
     if (existing) {
-        res.status(400).json({error: "Planter with that name already exists"})
+        res.status(401).json({error: "Planter with that name already exists"})
     } else {
         try {
             const newPlanter = await Planter.create({ planterName: planterName })
@@ -31,5 +31,10 @@ const createPlanter = async (req, res) => {
     }
     
 }
+
+// const deletePlanter = async (req, res) => {
+//     const { planterName } = req.params
+    
+//     if (!mongoose.Types.ObjectId.isValid(planterName))
 
 module.exports = { getPlanters, createPlanter }
