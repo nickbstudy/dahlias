@@ -17,12 +17,7 @@ export const flowerReducer = (state, action) => {
 export const FlowerContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(flowerReducer, {
         picked: '',
-        source: null
-        // locations: ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty',
-        //             'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 
-        //             'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty']
     })
-    console.log('FlowerState: ', state)
 
     return (
         <FlowerContext.Provider value={{...state, dispatch}}>

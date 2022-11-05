@@ -2,11 +2,13 @@ import { useEffect } from 'react'
 import ListGroup from 'react-bootstrap/ListGroup'
 import { usePlantersContext } from '../hooks/usePlantersContext'
 import { useActiveContext } from '../hooks/useActiveContext'
+import { useGardenContext } from '../hooks/useGardenContext'
 
 const PlanterBeds = () => {
 
     const { planters, dispatch } = usePlantersContext()
     const { activeName, activeId, dispatch: activeDispatch } = useActiveContext()
+    const { dispatch: gardenDispatch } = useGardenContext()
 
     async function clicked(e) {
 
@@ -29,7 +31,29 @@ const PlanterBeds = () => {
         }
 
         activeDispatch({type: 'SET_ACTIVE_PLANTER', payload: newPayload})
-        console.log(activeName, activeId)
+        const gardenPayload = {
+            bedId: json._id
+        }
+        const gardenResponse = await fetch('/api/flowersid', {
+            method: 'POST',
+            body: JSON.stringify(gardenPayload),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        
+        const gardenJson = await gardenResponse.json()
+        
+        const plantedBeds = gardenJson.map((flower) => {
+            return {
+                flowerName: flower.flowerName,
+                flowerLocation: flower.location
+            }
+        })
+        console.log('coming from PlanterBeds to SET_GARDEN:')
+        console.log(plantedBeds)
+        gardenDispatch({type: 'SET_GARDEN', payload: plantedBeds})
+
     }
 
     useEffect(() => {
@@ -44,7 +68,7 @@ const PlanterBeds = () => {
         }
 
         fetchPlanters()
-    }, [dispatch])
+    }, [dispatch, planters])
 
   return (
     <div style={{overflowY: 'hidden'}}>

@@ -12,7 +12,7 @@ const getFlowers = async (req, res) => {
 // plant 1 flower
 const plantFlower = async (req, res) => {
  
-    const { location, bedId } = req.body;
+    const { flowerName, location, bedId } = req.body;
     const existing = await Flower.findOne({ location: location, bedId: bedId })
 
     if (!existing) {

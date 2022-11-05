@@ -5,7 +5,7 @@ const { getFlowers, plantFlower } = require('../controllers/flowerController')
 const router = express.Router()
 
 
-router.get('/flowers', getFlowers)
+router.post('/flowersid', getFlowers)
 
 router.post('/flowers', plantFlower)
 

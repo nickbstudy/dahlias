@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { PlantersContextProvider } from './context/PlanterContext';
 import { FlowerContextProvider } from './context/FlowerContext';
 import { ActiveContextProvider } from './context/ActiveContext';
+import { GardenContextProvider } from './context/GardenContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -15,7 +16,9 @@ root.render(
     <FlowerContextProvider>
     <PlantersContextProvider>
     <ActiveContextProvider>
+    <GardenContextProvider>
       <App />
+    </GardenContextProvider>
     </ActiveContextProvider>
     </PlantersContextProvider>
     </FlowerContextProvider>

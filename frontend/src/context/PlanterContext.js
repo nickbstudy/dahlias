@@ -8,15 +8,9 @@ export const plantersReducer = (state, action) => {
             return {
                 planters: action.payload
             }
-        case 'CREATE_PLANTER':
+        case 'UPDATE_PLANTER':
             return {
                 planters: [action.payload, ...state.planters]
-            }
-        case 'SET_ACTIVE_PLANTER':
-            console.log(`Setting active planter to ${action.payload}`)
-            return {
-                activeId: action.payload
-                
             }
         default:
             return state

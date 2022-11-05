@@ -6,8 +6,10 @@ export const activeReducer = (state, action) => {
     switch (action.type) {
         case 'SET_ACTIVE_PLANTER':
             return {
-                activeId: action.payload,
-                activeName: action.payload
+                // activeId: action.payload,
+                // activeName: action.payload
+                activeId: action.payload.activeId,
+                activeName: action.payload.activeName
             }
         default:
             return state
@@ -20,13 +22,9 @@ export const ActiveContextProvider = ({children}) => {
         activeId: '',
         activeName: ''
     })
-
-    
-
     return (
         <ActiveContext.Provider value={{...state, dispatch}}>
             {children}
         </ActiveContext.Provider>
     )
-    console.log(state)
 }
