@@ -9,16 +9,37 @@ import allDahlias from './choices'
 
 const Planter = () => {
 
-  // let defLocations = []
 
-  // for (let i = 0; i < 29; i++) {
-  //   defLocations.push({flowerName: 'empty', imageSrc: white})
-  // }
   const { picked } = useFlowerContext()
   const { activeId } = useActiveContext()
   const { locations, dispatch} = useGardenContext()
   const [inlineLocations, setInlineLocations] = useState([])
   const [locSource, setLocSource] = useState([])
+
+
+  async function handleClick(e) {
+    
+    if(e.detail == 2) {
+      // console.log(e.target.alt, activeId)
+      const toUnplant = {
+        location: e.target.alt,
+        bedId: activeId
+      }
+      const response = await fetch('/api/flowersdel', {
+        method: "POST",
+        body: JSON.stringify(toUnplant),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      
+      const cleanup = {
+        location: e.target.alt,
+        flowerName: 'empty'
+      }
+      dispatch({type: 'UPDATE_GARDEN', payload: cleanup})
+    }
+  }
 
   function allowDrop(ev) {
     ev.preventDefault();
@@ -26,14 +47,14 @@ const Planter = () => {
 
   async function dropped(e) {
     
-    console.log(picked)
+    
     const flower = {
       flowerName: picked,
       location: e.target.alt,
       bedId: activeId
     }
 
-    console.log(flower)
+    
 
     const response = await fetch('/api/flowers', {
         method: 'POST',
@@ -98,19 +119,19 @@ const Planter = () => {
       <div style={{paddingTop: '5px', gridArea: 'top', backgroundColor: "#f5ebe1", display: 'flex', justifyContent: 'space-evenly'}}>
         {inlineLocations.map((loc, index) => {
           if(index < 10) return <div key={index} style={{width: '146px', display: 'flex', flexDirection: 'column', alignItems: "center", textAlign: 'center'}}>
-            <img src={locSource[index]} alt={index} style={{width: '116px', height: '116px'}} onDragOver={allowDrop} onDrop={dropped} />{loc}</div>
+            <img src={locSource[index]} alt={index} style={{width: '116px', height: '116px'}} onDragOver={allowDrop} onDrop={dropped} onClick={handleClick}/>{loc}</div>
         })}
       </div>
       <div style={{padding: '5px 60px', gridArea: 'mid', backgroundColor: "#f5ebe1", display: 'flex', justifyContent:'space-evenly'}}>
       {inlineLocations.map((loc, index) => {
           if(index >= 10 && index < 19) return <div key={index} style={{width: '146px', display: 'flex', flexDirection: 'column', alignItems: "center", textAlign: 'center'}}>
-            <img src={locSource[index]} alt={index} style={{width: '116px', height: '116px'}} onDragOver={allowDrop} onDrop={dropped} />{loc}</div>
+            <img src={locSource[index]} alt={index} style={{width: '116px', height: '116px'}} onDragOver={allowDrop} onDrop={dropped} onClick={handleClick}/>{loc}</div>
         })}
       </div>
       <div style={{paddingTop: '5px', gridArea: 'bot', backgroundColor: "#f5ebe1", display: 'flex', justifyContent:'space-evenly'}}>
         {inlineLocations.map((loc, index) => {
           if(index >= 19) return <div key={index} style={{width: '146px', display: 'flex', flexDirection: 'column', alignItems: "center", textAlign: 'center'}}>
-            <img src={locSource[index]} alt={index} style={{width: '116px', height: '116px'}} onDragOver={allowDrop} onDrop={dropped} />{loc}</div>
+            <img src={locSource[index]} alt={index} style={{width: '116px', height: '116px'}} onDragOver={allowDrop} onDrop={dropped} onClick={handleClick}/>{loc}</div>
         })}
       </div>
       

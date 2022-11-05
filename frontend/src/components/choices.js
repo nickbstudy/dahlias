@@ -57,6 +57,7 @@ import salmonRunner from './images/salmonRunner.jpg'
 import sebastian from './images/sebastian.jpg'
 import seniorsHope from './images/seniorsHope.jpg'
 import snohoJojo from './images/snohoJojo.jpg'
+import strawberriesAndCream from './images/strawberriesAndCream.jpg'
 import sunshineGirl from './images/sunshineGirl.jpg'
 import sweetNathalie from './images/sweetNathalie.jpg'
 import sweetSavannah from './images/sweetSavannah.jpg'
@@ -303,6 +304,10 @@ const allDahlias = [
     {
         title: 'Snoho Jojo',
         fileName: snohoJojo
+    },   
+    {
+        title: 'Strawberries & Cream',
+        fileName: strawberriesAndCream
     },   
     {
         title: 'Sunshine Girl',

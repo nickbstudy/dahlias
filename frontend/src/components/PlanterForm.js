@@ -7,7 +7,7 @@ import PlanterBeds from './PlanterBeds'
 const PlanterForm = () => {
 
     const { dispatch } = usePlantersContext()
-    const { activeName } = useActiveContext()
+    const { dispatch: activeDispatch, activeName } = useActiveContext()
 
     const [viewing, setViewing] = useState('none')
     const [newName, setNewName] = useState('')
@@ -32,8 +32,14 @@ const PlanterForm = () => {
         }
         if (response.ok) {
             console.log('new planter added', json)
+            const newPayload = {
+                activeId: json._id,
+                activeName: newName
+            }
             setNewName('')
             dispatch({type: "CREATE_PLANTER", payload: json})
+            
+            
         }
     }
 

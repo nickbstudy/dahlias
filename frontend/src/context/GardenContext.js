@@ -31,7 +31,6 @@ export const gardenReducer = (state, action) => {
         case 'UPDATE_GARDEN':
 
             const original = state.locations
-            console.log(original)
             const toUpdate = action.payload.location
             const newName = action.payload.flowerName
             const updated = original.map((original, index) => {

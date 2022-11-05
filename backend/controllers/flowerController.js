@@ -37,4 +37,15 @@ const plantFlower = async (req, res) => {
     }
 }
 
-module.exports = { getFlowers, plantFlower }
+const deleteFlower = async (req, res) => {
+    const { location, bedId } = req.body;
+
+    const deleted = await Flower.findOneAndDelete({location: location, bedId: bedId})
+
+    if (!deleted) {
+        return res.status(404).json({error: 'No such flower'})
+    }
+
+    res.status(200).json(deleted)
+}
+module.exports = { getFlowers, plantFlower, deleteFlower}
