@@ -16,17 +16,18 @@ const createPlanter = async (req, res) => {
     const { planterName } = req.body
     if (!planterName) {
         res.status(400).json({error: "Name must not be empty"})
-    }
-    const existing = await Planter.exists({ planterName: planterName})
-    
-    if (existing) {
-        res.status(400).json({error: "Planter with that name already exists"})
     } else {
-        try {
-            const newPlanter = await Planter.create({ planterName: planterName })
-            res.status(200).json(newPlanter)
-        } catch (error) {
-            res.status(400).json({error: error.message})
+        const existing = await Planter.exists({ planterName: planterName})
+        
+        if (existing) {
+            res.status(400).json({error: "Planter with that name already exists"})
+        } else {
+            try {
+                const newPlanter = await Planter.create({ planterName: planterName })
+                res.status(200).json(newPlanter)
+            } catch (error) {
+                res.status(400).json({error: error.message})
+            }
         }
     }
     

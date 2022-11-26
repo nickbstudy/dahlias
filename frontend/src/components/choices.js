@@ -1,5 +1,6 @@
 
 import allowayCandy from './images/allowayCandy.jpg'
+import americanDawn from './images/americanDawn.jpg'
 import allowayCottage from './images/allowayCottage.jpg'
 import aprilHeather from './images/aprilHeather.jpg'
 import bacardi from './images/bacardi.jpg'
@@ -80,6 +81,10 @@ const allDahlias = [
     {
         title: 'Alloway Cottage',
         fileName: allowayCottage
+    },
+    {
+        title: 'American Dawn',
+        fileName: americanDawn
     },
     {
         title: 'April Heather',
